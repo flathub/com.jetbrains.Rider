@@ -1,4 +1,3 @@
-
 app-id: com.jetbrains.Rider
 runtime: org.freedesktop.Sdk
 runtime-version: '19.08'
@@ -31,13 +30,13 @@ modules:
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2019.3.4.tar.gz
-        sha256: e2a0c419c235529320f0c043155c85bc86032ac61717191593f5b63036d85d9d
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2020.1.0.tar.gz
+        sha256: 9a138e124d1e22e831ce3be286d5a7f3ca80a0b1feefb511dd16917972bb94aa
         filename: rider.tar.gz
         x-checker-data:
           type: jetbrains
           code: RD
-        size: 661849418
+        size: 796664863
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
