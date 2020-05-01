@@ -7,7 +7,7 @@ if [[ -d /usr/lib/sdk/dotnet ]]; then
 fi
 
 if [[ -d /usr/lib/sdk/mono5 ]]; then
-  . /usr/lib/sdk/mono5/enable.sh
+  . /usr/lib/sdk/mono5/use.sh
 fi
 
 exec env JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=${XDG_CACHE_HOME}/tmp/ \
