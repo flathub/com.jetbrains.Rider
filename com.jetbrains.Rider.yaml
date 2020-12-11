@@ -2,7 +2,7 @@ app-id: com.jetbrains.Rider
 runtime: org.freedesktop.Sdk
 runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
-command: rider-desktop
+command: rider
 separate-locales: false
 tags:
   - proprietary
@@ -24,7 +24,6 @@ modules:
     build-commands:
       - unzip rider_logos.zip
       - install -D apply_extra /app/bin/apply_extra
-      - install -D -m755 rider.sh ${FLATPAK_DEST}/bin/rider-desktop
       - install -D -m644 rider_logos/icon-rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
@@ -41,8 +40,6 @@ modules:
         path: com.jetbrains.Rider.desktop
       - type: file
         path: com.jetbrains.Rider.metainfo.xml
-      - type: file
-        path: rider.sh
       - type: script
         commands:
           - mkdir rider/
@@ -53,3 +50,13 @@ modules:
         sha256: 894d2776d31ac722a2958f4dfd549652b4ea2c1615aafd403cdd7a3277e02850
         url: https://resources.jetbrains.com/storage/products/rider/docs/rider_logos.zip
         size: 210376
+
+  - name: wrapper
+    buildsystem: meson
+    config-opts:
+      - "-Deditor_binary=/app/extra/rider/bin/rider.sh"
+      - "-Dprogram_name=rider"
+      - "-Deditor_title=Rider"
+    sources:
+      - type: dir
+        path: jetbrains-flatpak-wrapper
