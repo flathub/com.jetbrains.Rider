@@ -59,4 +59,4 @@ modules:
       - "-Deditor_title=Rider"
     sources:
       - type: dir
-        path: wrapper
+        path: jetbrains-flatpak-wrapper
