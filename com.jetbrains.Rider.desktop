@@ -6,6 +6,6 @@ Icon=com.jetbrains.Rider
 Keywords=development;
 Name=Rider
 StartupNotify=true
-StartupWMClass=rider-desktop
+StartupWMClass=rider
 Terminal=false
 Type=Application
