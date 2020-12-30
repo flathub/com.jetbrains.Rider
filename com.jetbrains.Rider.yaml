@@ -29,13 +29,13 @@ modules:
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2020.3.1.tar.gz
-        sha256: 4cb323dc364290e92dfe5f0bd4f83d396247fc9f046f8b592c824ad03c908624
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2020.3.2.tar.gz
+        sha256: 123418dfcd3fc03c1f274cfca50499bcd88495cef60e791cd74c4e6c455b6fb6
         filename: rider.tar.gz
         x-checker-data:
           type: jetbrains
           code: RD
-        size: 917291455
+        size: 916913040
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
