@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Development;IDE;
-Exec=rider-desktop
+Exec=rider
 GenericName=Fast & powerful, cross platform .NET IDE
 Icon=com.jetbrains.Rider
 Keywords=development;
