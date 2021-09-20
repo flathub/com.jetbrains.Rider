@@ -35,6 +35,7 @@ modules:
         x-checker-data:
           type: jetbrains
           code: RD
+          is-main-source: true
         size: 940979634
       - type: file
         path: com.jetbrains.Rider.desktop
