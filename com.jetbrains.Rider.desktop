@@ -9,3 +9,4 @@ StartupNotify=true
 StartupWMClass=rider
 Terminal=false
 Type=Application
+MimeType=application/x-dotnet-solution;application/x-dotnet-fsharp-project;application/x-dotnet-csharp-project;application/x-dotnet-vb-project;text/x-csharp;text/x-fsharp;text/x-visualbasic;
