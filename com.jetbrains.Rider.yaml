@@ -29,14 +29,14 @@ modules:
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2022.1.2.tar.gz
-        sha256: 4513e55d3db013986bdfda52854f89fb127a153f2588ae456d6e7a182987b741
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2022.2.tar.gz
+        sha256: fa98ec717c647629b0e96cd57b138d4913fe3899032c6fc205654cab868d9808
         filename: rider.tar.gz
         x-checker-data:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 902553875
+        size: 979663613
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
