@@ -12,6 +12,7 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --filesystem=host
+  - --filesystem=xdg-run/keyring
   - --socket=session-bus
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.secrets
@@ -19,6 +20,8 @@ finish-args:
   - --device=all
   - --env=RIDER_JDK=${FLATPAK_DEST}/extra/rider/jre64
 modules:
+  - shared-modules/libsecret/libsecret.json
+
   - name: rider
     buildsystem: simple
     build-commands:
