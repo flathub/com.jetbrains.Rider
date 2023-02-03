@@ -1,6 +1,6 @@
 app-id: com.jetbrains.Rider
 runtime: org.freedesktop.Sdk
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: rider
 separate-locales: false
@@ -12,6 +12,7 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --filesystem=host
+  - --filesystem=xdg-run/keyring
   - --socket=session-bus
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.secrets
@@ -19,6 +20,8 @@ finish-args:
   - --device=all
   - --env=RIDER_JDK=${FLATPAK_DEST}/extra/rider/jre64
 modules:
+  - shared-modules/libsecret/libsecret.json
+
   - name: rider
     buildsystem: simple
     build-commands:
@@ -29,14 +32,14 @@ modules:
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2021.3.3.tar.gz
-        sha256: 1dc57d5d7932d4a8dea51fc5cbdaa52f9626490092978f02fa15bb41cb84068f
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2022.3.2.tar.gz
+        sha256: ad853b75bc1e1379593bece3a5fbecec21d1de30263d0d5fef067a352b7d27ef
         filename: rider.tar.gz
         x-checker-data:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 986900359
+        size: 1125940858
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
