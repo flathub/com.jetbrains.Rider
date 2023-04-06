@@ -26,6 +26,7 @@ modules:
     buildsystem: simple
     build-commands:
       - unzip rider_logos.zip
+      - install rider.sh ${FLATPAK_DEST}/bin/rider-zypak.sh
       - install -D apply_extra /app/bin/apply_extra
       - install -D -m644 rider_logos/icon-rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
@@ -54,11 +55,22 @@ modules:
         sha256: 894d2776d31ac722a2958f4dfd549652b4ea2c1615aafd403cdd7a3277e02850
         url: https://resources.jetbrains.com/storage/products/rider/docs/rider_logos.zip
         size: 210376
+      - type: script
+        dest-filename: rider.sh
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - exec zypak-wrapper /app/extra/rider/bin/rider.sh "$@"
+
+  - name: zypak
+    sources:
+      - type: git
+        url: https://github.com/refi64/zypak
+        tag: v2022.04
 
   - name: wrapper
     buildsystem: meson
     config-opts:
-      - -Deditor_binary=/app/extra/rider/bin/rider.sh
+      - -Deditor_binary=/app/bin/rider-zypak.sh
       - -Dprogram_name=rider
       - -Deditor_title=Rider
     sources:
