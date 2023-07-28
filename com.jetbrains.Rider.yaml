@@ -36,11 +36,24 @@ modules:
         url: https://download.jetbrains.com/rider/JetBrains.Rider-2023.1.4.tar.gz
         sha256: 0ff1916d0db4f081629e118da5418353e14d57bf2c0ec983db931d989becc683
         filename: rider.tar.gz
+        only-arches:
+          - x86_64
         x-checker-data:
           type: jetbrains
           code: RD
           is-main-source: true
         size: 1181139940
+      - type: extra-data
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2023.1.4-aarch64.tar.gz
+        sha256: eb278d5214b48920c8a08af87fe859398874ec14c485362e27e545b93d967686
+        filename: rider.tar.gz
+        only-arches:
+          - aarch64
+        x-checker-data:
+          type: jetbrains
+          code: RD
+          is-main-source: true
+        size: 1170237867
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
