@@ -33,14 +33,14 @@ modules:
       - cat idea.properties | tee -a ${FLATPAK_DEST}/bin/idea.properties
     sources:
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2023.2.2.tar.gz
-        sha256: a32b2d0682613f3afacd11eac1a79f022c99e17ef9ab23fe26c5d8d34b093ad8
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2023.2.3.tar.gz
+        sha256: ce681973b6709c34f333a9e830885209048b006f5012f167877c745210bf4e57
         filename: rider.tar.gz
         x-checker-data:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 1114861006
+        size: 1114900148
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
