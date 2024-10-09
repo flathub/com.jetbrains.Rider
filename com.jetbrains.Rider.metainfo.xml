@@ -30,8 +30,11 @@
   <update_contact>sakcheen+flathub_AT_gmail.com</update_contact>
   <content_rating type="oars-1.1"/>
   <releases>  
-    <release version="2024.2.5" date="2024-09-20">
+    <release version="2024.2.6" date="2024-10-09">
          <description></description>  
+    </release>  
+    <release version="2024.2.5" date="2024-09-20">
+         <description/>  
     </release>  
     <release version="2024.2.4" date="2024-09-09">
          <description/>  
