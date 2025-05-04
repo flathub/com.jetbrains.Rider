@@ -33,8 +33,8 @@ modules:
       - cat idea.properties | tee -a ${FLATPAK_DEST}/bin/idea.properties
     sources:
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.tar.gz
-        sha256: 1f9db9f3f90c71fe476e3e17ac78be9fcc982e3f017c598f631b5cd600e6da43
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2025.1.1.tar.gz
+        sha256: 7afe1b4c5f31d0bf3ce46f0805756217a6ce88708b7b6c58ff8b6acb851d630e
         filename: rider.tar.gz
         only-arches:
           - x86_64
@@ -42,10 +42,10 @@ modules:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 1907343120
+        size: 1925297260
       - type: extra-data
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.tar.gz
-        sha256: f8c459c77327e97812507ba4724e6e9911e918425f5a187707cb66efafa47c45
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2025.1.1-aarch64.tar.gz
+        sha256: c64948d52337e91bd2df4257c24452d8cccb93b4a4d0893246267b66ff5ce512
         filename: rider.tar.gz
         only-arches:
           - aarch64
@@ -53,7 +53,7 @@ modules:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 1897856920
+        size: 1915130826
       - type: file
         path: com.jetbrains.Rider.desktop
       - type: file
