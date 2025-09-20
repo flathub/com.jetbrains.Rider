@@ -2,7 +2,7 @@ app-id: com.jetbrains.Rider
 runtime: org.freedesktop.Sdk
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
-command: rider
+command: rider-wrapper
 separate-locales: false
 tags:
   - proprietary
@@ -70,13 +70,12 @@ modules:
       - type: file
         path: idea.properties
 
-  - name: wrapper
+  - name: ide-flatpak-wrapper
     buildsystem: meson
     config-opts:
-      - -Deditor_binary=/app/extra/rider/bin/rider.sh
-      - -Dprogram_name=rider
+      - -Deditor_binary=/app/extra/rider/bin/rider
+      - -Dprogram_name=rider-wrapper
       - -Deditor_title=Rider
     sources:
-      - type: git
-        url: https://github.com/Lctrs/jetbrains-flatpak-wrapper.git
-        commit: 5a054811ab2144ceaf343169b240a70eeb4dfb47
+      - type: dir
+        path: ide-flatpak-wrapper
