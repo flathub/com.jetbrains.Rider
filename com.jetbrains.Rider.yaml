@@ -20,7 +20,6 @@ finish-args:
   - --device=all
   - --env=RIDER_JDK=${FLATPAK_DEST}/extra/rider/jre64
 modules:
-  - shared-modules/libsecret/libsecret.json
 
   - name: rider
     buildsystem: simple
