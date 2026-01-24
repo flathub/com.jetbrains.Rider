@@ -1,3 +1,0 @@
-[submodule "ide-flatpak-wrapper"]
-	path = ide-flatpak-wrapper
-	url = https://github.com/flathub-infra/ide-flatpak-wrapper.git
