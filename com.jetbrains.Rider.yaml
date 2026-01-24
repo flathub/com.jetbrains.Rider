@@ -76,5 +76,6 @@ modules:
       - -Dprogram_name=rider-wrapper
       - -Deditor_title=Rider
     sources:
-      - type: dir
-        path: ide-flatpak-wrapper
+      - type: git
+        url: https://github.com/flathub-infra/ide-flatpak-wrapper.git
+        commit: d581fd9b873acbf6fb22899aa388435f6c00f61a
