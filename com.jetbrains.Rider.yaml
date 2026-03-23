@@ -17,6 +17,7 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.secrets
   - --talk-name=org.freedesktop.Flatpak
+  - --talk-name=org.freedesktop.FileManager1
   - --device=all
   - --env=RIDER_JDK=${FLATPAK_DEST}/extra/rider/jre64
 modules:
