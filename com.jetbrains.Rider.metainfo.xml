@@ -6,7 +6,6 @@
   <name>Rider</name>
   <summary>Fast &amp; powerful, cross platform .NET IDE</summary>
   <description>
-    <p>**NOTE: This wrapper is not verified by, affiliated with, or supported by JetBrains s.r.o.**</p>
     <p>
     Rider supports .NET Framework, the new cross-platform .NET Core, and Mono based projects. This lets you develop a wide range of applications including .NET desktop applications, services and libraries, Unity games, Xamarin apps, ASP.NET, and ASP.NET Core web applications.
     </p>
