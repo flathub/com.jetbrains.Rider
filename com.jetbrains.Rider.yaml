@@ -27,54 +27,59 @@ modules:
     buildsystem: simple
     build-commands:
       - unzip rider_logos.zip
-      - install -D apply_extra /app/bin/apply_extra
+      - cp -a JetBrains\ Rider-*/* ${FLATPAK_DEST}
       - install -D -m644 rider_logos/icon-rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
       - cat idea.properties | tee -a ${FLATPAK_DEST}/bin/idea.properties
+
     sources:
-      - type: extra-data
+
+      # App binaries - x64
+      - type: archive
+        strip-components: 0
         url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.3.1.tar.gz
         sha256: fa4b09a5f7cf4b6635b093adc7313991778a8dc74f25614a2b8976b04dee5d4e
-        filename: rider.tar.gz
         only-arches:
           - x86_64
         x-checker-data:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 2398189581
-      - type: extra-data
+
+      # App binaries - arm64
+      - type: archive
+        strip-components: 0
         url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.3.1-aarch64.tar.gz
         sha256: 8239c1e7c0352a9fb79dcbf68fb9550d64b215606a635ed88981291d92995a61
-        filename: rider.tar.gz
         only-arches:
           - aarch64
         x-checker-data:
           type: jetbrains
           code: RD
           is-main-source: true
-        size: 2410530715
+
+      # Desktop file
       - type: file
         path: com.jetbrains.Rider.desktop
+
+      # Flatpak metadata
       - type: file
         path: com.jetbrains.Rider.metainfo.xml
-      - type: script
-        commands:
-          - mkdir rider/
-          - tar -xzf rider.tar.gz --directory=rider/ --strip-components=1
-          - rm rider.tar.gz
-        dest-filename: apply_extra
+
+      # Icons
       - type: file
         sha256: 894d2776d31ac722a2958f4dfd549652b4ea2c1615aafd403cdd7a3277e02850
         url: https://resources.jetbrains.com/storage/products/rider/docs/rider_logos.zip
+
+      # Rider settings
       - type: file
         path: idea.properties
 
   - name: ide-flatpak-wrapper
     buildsystem: meson
     config-opts:
-      - -Deditor_binary=/app/extra/rider/bin/rider
+      - -Deditor_binary=/app/bin/rider
       - -Dprogram_name=rider-wrapper
       - -Deditor_title=Rider
     sources:
