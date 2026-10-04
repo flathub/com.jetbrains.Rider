@@ -1,12 +1,7 @@
-#
-# Excludes
+*.iml
+.DS_Store
 .flatpak-builder/
 .idea/
 build/
-
-.DS_Store
+repo/
 Thumbs.db
-*.iml
-
-
-# Includes
