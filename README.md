@@ -101,6 +101,9 @@ Then, in the Rider settings, go to **Languages & Frameworks** -> **C# Interactiv
 /home/user/.dotnet/tools/dotnet-verso
 ```
 
+> [!NOTE]
+> Verso also requires adding `repl` to the arguments.
+
 ![C# Interactive Settings](./docs/csharp_interactive_01.png)
 
 Now, starting a new C# Interactive session should work:
