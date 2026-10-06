@@ -1,5 +1,6 @@
 # JetBrains Rider Flatpak
 
+> [!NOTE]
 > Command examples below assume having Rider installed system-wide. If you're using a user installation instead, add "--user".
 
 ## Setting up Dotnet
@@ -16,10 +17,12 @@ flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
 flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 ```
 
-Then you need to enable the Flatpak extension by setting the environment variable:
+> [!NOTE]
+> As noted before, add `--user` if you're using a user installation, e.g. `flatpak install --user flathub org.freedesktop.Sdk.Extension.dotnet10`.
 
-`FLATPAK_ENABLE_SDK_EXT` to either `dotnet10` or `*` (to enable all extensions, be sure to check what you enable here).
+Then you need to enable the Flatpak extension by setting the `FLATPAK_ENABLE_SDK_EXT` environment variable to either `dotnet10` or `*`.
 
+> [!NOTE]
 > This functionality is inherited from the [Flatpak wrapper for IDEs](https://github.com/flathub-infra/ide-flatpak-wrapper).
 
 Enable all SDK extensions:
@@ -31,7 +34,10 @@ flatpak override --env="FLATPAK_ENABLE_SDK_EXT=*" com.jetbrains.Rider
 Enable specific ones:
 
 ```bash
+# Single
 flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet10 com.jetbrains.Rider
+
+# Multiple
 flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet9,dotnet10 com.jetbrains.Rider
 ```
 
@@ -41,8 +47,14 @@ See current overrides:
 flatpak override --show com.jetbrains.Rider
 ```
 
+```bash
+[Environment]
+FLATPAK_ENABLE_SDK_EXT=*
+```
+
 You can check what SDKs Rider is seeing through the terminal:
 
+> [!NOTE]
 > The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
 > Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
 
