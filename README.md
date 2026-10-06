@@ -11,10 +11,10 @@ Using the host-installed SDK can cause problems due to misaligned dependencies, 
 To install the .Net SDK (choose the relevant versions):
 
 ```bash
-flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
-flatpak install flathub org.freedesktop.Sdk.Extension.dotnet9
-flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
-flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
+> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
+> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet9
+> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
+> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 ```
 
 > [!NOTE]
@@ -25,26 +25,24 @@ Then you need to enable the Flatpak extension by setting the `FLATPAK_ENABLE_SDK
 Enable all SDK extensions:
 
 ```bash
-flatpak override --env="FLATPAK_ENABLE_SDK_EXT=*" com.jetbrains.Rider
+> flatpak override --env="FLATPAK_ENABLE_SDK_EXT=*" com.jetbrains.Rider
 ```
 
 Enable specific ones:
 
 ```bash
 # Single
-flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet10 com.jetbrains.Rider
+> flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet10 com.jetbrains.Rider
 
 # Multiple
-flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet9,dotnet10 com.jetbrains.Rider
+> flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet9,dotnet10 com.jetbrains.Rider
 ```
 
 See current overrides:
 
 ```bash
-flatpak override --show com.jetbrains.Rider
-```
+> flatpak override --show com.jetbrains.Rider
 
-```bash
 [Environment]
 FLATPAK_ENABLE_SDK_EXT=*
 ```
@@ -72,7 +70,7 @@ Microsoft.NETCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.NETCor
 You can allow Rider to talk to the Docker API, by adding the Docker socket as an override:
 
 ```bash
-flatpak override --filesystem=/run/docker.sock com.jetbrains.Rider
+> flatpak override --filesystem=/run/docker.sock com.jetbrains.Rider
 ```
 
 ## C# Interactive
@@ -90,9 +88,9 @@ In the meantime, there are a couple alternative projects that you can use to res
 First, install **one** of the projects as a .Net global tool:
 
 ```bash
-dotnet tool install --global dotnet-csi
-dotnet tool install --global dotnet-script
-dotnet tool install --global verso.cli
+> dotnet tool install --global dotnet-csi
+> dotnet tool install --global dotnet-script
+> dotnet tool install --global verso.cli
 ```
 
 Then, in the Rider settings, go to **Languages & Frameworks** -> **C# Interactive**, and set **C# interactive tool:** to the path of the .Net tool:
@@ -120,18 +118,18 @@ flatpak install --user --assumeyes flathub org.flatpak.Builder
 Add Flathub as a user-wide repo:
 
 ```bash
-flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+> flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
 Build Rider flatpak (for current architecture, including install):
 
 ```bash
-./build.sh
+> ./build.sh
 ```
 
 Build flatpak for specific architecture, without install:
 
 ```bash
-./build-aarch64.sh
-./build-x86_64.sh
+> ./build-aarch64.sh
+> ./build-x86_64.sh
 ```
