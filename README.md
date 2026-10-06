@@ -1,14 +1,14 @@
 # JetBrains Rider Flatpak
 
 > [!NOTE]
-> Command examples below assume having Rider installed system-wide. If you're using a user installation instead, add "--user".
+> Command examples below assume having Rider installed system-wide. If you're using a user installation instead, add `--user`.
 
 ## Setting up Dotnet
 
-It is highly recommended to use the dotnet-sdk extension provided by Flatpak instead of one installed from your package manager.
-Using the host-installed SDK can cause problems due to misaligned dependencies, like [breaking with system updates](https://github.com/flathub/com.jetbrains.Rider/issues/43).
+It is highly recommended to use the [.Net SDK extension provided by Flatpak](https://github.com/flathub/org.freedesktop.Sdk.Extension.dotnet10) instead of one installed from your package manager.
+Using the host-installed SDK can cause problems due to misaligned dependencies, such as [breaking with system updates](https://github.com/flathub/com.jetbrains.Rider/issues/43).
 
-To install the dotnet-sdk (choose the relevant versions):
+To install the .Net SDK (choose the relevant versions):
 
 ```bash
 flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
@@ -21,9 +21,6 @@ flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 > As noted before, add `--user` if you're using a user installation, e.g. `flatpak install --user flathub org.freedesktop.Sdk.Extension.dotnet10`.
 
 Then you need to enable the Flatpak extension by setting the `FLATPAK_ENABLE_SDK_EXT` environment variable to either `dotnet10` or `*`.
-
-> [!NOTE]
-> This functionality is inherited from the [Flatpak wrapper for IDEs](https://github.com/flathub-infra/ide-flatpak-wrapper).
 
 Enable all SDK extensions:
 
@@ -51,6 +48,9 @@ flatpak override --show com.jetbrains.Rider
 [Environment]
 FLATPAK_ENABLE_SDK_EXT=*
 ```
+
+> [!NOTE]
+> This functionality is inherited from the [Flatpak wrapper for IDEs](https://github.com/flathub-infra/ide-flatpak-wrapper).
 
 You can check what SDKs Rider is seeing through the terminal:
 
