@@ -52,10 +52,6 @@ FLATPAK_ENABLE_SDK_EXT=*
 
 You can check what SDKs Rider is seeing through the terminal:
 
-> [!NOTE]
-> The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
-> Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
-
 ```bash
 > dotnet --list-sdks
 10.0.401 [/usr/lib/sdk/dotnet10/lib/sdk]
@@ -64,6 +60,10 @@ You can check what SDKs Rider is seeing through the terminal:
 Microsoft.AspNetCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.AspNetCore.App]
 Microsoft.NETCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.NETCore.App]
 ```
+
+> [!NOTE]
+> The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
+> Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
 
 ## Docker Engine
 
