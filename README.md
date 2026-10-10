@@ -20,7 +20,113 @@ To install the .Net SDK (choose the relevant versions):
 By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable,
 which you can customize as described below.
 
-### Customizing .Net SDKs
+## Docker Engine
+
+You can allow Rider to talk to the Docker API, by adding the Docker socket as an override:
+
+```bash
+> flatpak override --filesystem=/run/docker.sock com.jetbrains.Rider
+```
+
+> [!NOTE]
+> The `docker` binary is shimmed in the Flatpak, meaning Rider can already call it, it just needs access to the Docker engine socket.
+
+## Web Browsers
+
+Rider can use a web browser to start applications and optionally attach the debugger to them.
+
+However, since Rider is running in the Flatpak sandbox, it can't see the browsers installed on your system.
+
+The Flatpak includes shims for a couple popular browsers, so that they can be called by Rider, as if they were in the sandbox itself.
+
+- Chrome (Flatpak, `com.google.Chrome`)
+- Chromium (Flatpak `org.chromium.Chromium`)
+- Edge (Flatpak, `com.microsoft.Edge`)
+- Firefox (native, `firefox`)
+- Ungoogled Chromium (Flatpak `io.github.ungoogled_software.ungoogled_chromium`)
+
+You can then configure these as you would normally:
+
+![Web Browser Configuration](./docs/web_browser_configuration_01.png)
+
+### Adding Additional Browsers
+
+If the browser of your choice is not in the above list, you can add it manually:
+
+```bash
+> flatpak override --env=PATH=/home/$USER/Public com.jetbrains.Rider
+```
+
+Additionally, you can also [open an issue](https://github.com/flathub/com.jetbrains.Rider/issues) requesting the browser, so it can be added to the list.
+
+## Using Applications on the Host
+
+> [!NOTE]
+> TL;DR: Make the Flatpak version of the Brave browser available to Rider:
+> `flatpak override --env=FLATPAK_SHIMS_ADD=com.brave.Browser com.jetbrains.Rider`
+
+Rider can use various external programs, like `docker`, `kubectl` and web browers like `firefox` or `chromium`.
+But these apps live outside the Flatpak sandbox, so by default, Rider won't see them.
+
+You can make such apps available to Rider by creating **shims**; small executables that can be called by Rider, and
+route to the real app, on the host.
+
+This can be done through the `FLATPAK_SHIMS` and `FLATPAK_SHIMS_ADD` environment variables:
+
+- **FLATPAK_SHIMS** is pre-configured with some popular apps like `docker`, `podman` and some browser;
+- **FLATPAK_SHIMS_ADD** can be used to add to **FLATPAK_SHIMS**, without removing the ones already present.
+
+This would make the Flatpak version of the Brave browser available to Rider:
+
+```bash
+> `flatpak override --env=FLATPAK_SHIMS_ADD=com.brave.Browser com.jetbrains.Rider`
+```
+
+You can also change the pre-configured list, by changing **FLATPAK_SHIMS**.
+For example, the following would limit the available shims to `docker`, removing all pre-configured ones, such as `kubectl`.
+
+```bash
+> `flatpak override --env=FLATPAK_SHIMS=docker com.jetbrains.Rider`
+```
+
+## C# Interactive
+
+The **C# Interactive** feature in Rider uses the now [deprecated csi command line tool](https://github.com/dotnet/interactive/issues/4163).
+
+We're waiting to see what direction JetBrains is gonna take, before making changes to the Flatpak itself.
+
+In the meantime, there are a couple alternative projects that you can use to restore (at least part) of this functionality.
+
+- [Dotnet CSI](https://github.com/DevTeam/csharp-interactive)
+- [Dotnet Script](https://github.com/dotnet-script/dotnet-script)
+- [Verso](https://github.com/DataficationSDK/Verso)
+
+First, install **one** of the projects as a .Net global tool:
+
+```bash
+> dotnet tool install --global dotnet-csi
+> dotnet tool install --global dotnet-script
+> dotnet tool install --global verso.cli
+```
+
+Then, in the Rider settings, go to **Languages & Frameworks** -> **C# Interactive**, and set **C# interactive tool:** to the path of the .Net tool:
+
+```bash
+/home/user/.dotnet/tools/dotnet-csi
+/home/user/.dotnet/tools/dotnet-script
+/home/user/.dotnet/tools/dotnet-verso
+```
+
+> [!NOTE]
+> Verso also requires adding `repl` to the arguments.
+
+![C# Interactive Settings](./docs/csharp_interactive_01.png)
+
+Now, starting a new C# Interactive session should work:
+
+![C# Interactive Demo](./docs/csharp_interactive_02.png)
+
+## Customizing .Net SDKs
 
 > [!NOTE]
 > As noted before, add `--user` if you're using a user installation, e.g. `flatpak install --user flathub org.freedesktop.Sdk.Extension.dotnet10`.
@@ -72,82 +178,6 @@ Microsoft.NETCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.NETCor
 > The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
 > Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
 
-## Docker Engine
-
-You can allow Rider to talk to the Docker API, by adding the Docker socket as an override:
-
-```bash
-> flatpak override --filesystem=/run/docker.sock com.jetbrains.Rider
-```
-
-> [!NOTE]
-> The `docker` binary is shimmed in the Flatpak, meaning Rider can already call it, it just needs access to the Docker engine socket.
-
-## Web Browsers
-
-Rider can use a web browser to start applications and optionally attach the debugger to them.
-
-However, since Rider is running in the Flatpak sandbox, it can't see the browsers installed on your system.
-
-The Flatpak includes shims for a couple popular browsers, so that they can be called by Rider, as if they were in the sandbox itself.
-
-- Chrome (Flatpak, `com.google.Chrome`)
-- Chromium (Flatpak `org.chromium.Chromium`)
-- Edge (Flatpak, `com.microsoft.Edge`)
-- Firefox (native, `firefox`)
-- Ungoogled Chromium (Flatpak `io.github.ungoogled_software.ungoogled_chromium`)
-
-You can then configure these as you would normally:
-
-![Web Browser Configuration](./docs/web_browser_configuration_01.png)
-
-### Adding Additional Browsers
-
-If the browser of your choice is not in the above list, you can add it manually:
-
-```bash
-> flatpak override --env=PATH=/home/$USER/Public com.jetbrains.Rider
-```
-
-Additionally, you can also [open an issue](https://github.com/flathub/com.jetbrains.Rider/issues) requesting the browser, so it can be added to the list.
-
-## C# Interactive
-
-The **C# Interactive** feature in Rider uses the now [deprecated csi command line tool](https://github.com/dotnet/interactive/issues/4163).
-
-We're waiting to see what direction JetBrains is gonna take, before making changes to the Flatpak itself.
-
-In the meantime, there are a couple alternative projects that you can use to restore (at least part) of this functionality.
-
-- [Dotnet CSI](https://github.com/DevTeam/csharp-interactive)
-- [Dotnet Script](https://github.com/dotnet-script/dotnet-script)
-- [Verso](https://github.com/DataficationSDK/Verso)
-
-First, install **one** of the projects as a .Net global tool:
-
-```bash
-> dotnet tool install --global dotnet-csi
-> dotnet tool install --global dotnet-script
-> dotnet tool install --global verso.cli
-```
-
-Then, in the Rider settings, go to **Languages & Frameworks** -> **C# Interactive**, and set **C# interactive tool:** to the path of the .Net tool:
-
-```bash
-/home/user/.dotnet/tools/dotnet-csi
-/home/user/.dotnet/tools/dotnet-script
-/home/user/.dotnet/tools/dotnet-verso
-```
-
-> [!NOTE]
-> Verso also requires adding `repl` to the arguments.
-
-![C# Interactive Settings](./docs/csharp_interactive_01.png)
-
-Now, starting a new C# Interactive session should work:
-
-![C# Interactive Demo](./docs/csharp_interactive_02.png)
-
 ## Building Flatpak Package Locally
 
 Install flatpak-builder:
@@ -169,6 +199,10 @@ Build Rider flatpak (for current architecture, including install):
 ```
 
 Build flatpak for specific architecture, without install:
+
+> [!NOTE]
+> To build for an architecture different than the current machine,
+> install `qemu-user-static` and `qemu-user-static-binfmt`.
 
 ```bash
 > ./build-aarch64.sh

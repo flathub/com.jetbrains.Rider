@@ -12,6 +12,17 @@ finish-args:
   # Enable Flatpak .Net SDKs, see this page for supported frameworks:
   # https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core
   - --env=FLATPAK_ENABLE_SDK_EXT=dotnet8,dotnet9,dotnet10
+  #
+  - >-
+    --env=FLATPAK_SHIMS=
+    docker,
+    kubectl,
+    podman,
+    com.google.Chrome,
+    com.microsoft.Edge,
+    firefox,
+    io.github.ungoogled_software.ungoogled_chromium,
+    org.chromium.Chromium
   # Rider Java runtime
   - --env=RIDER_JDK=${FLATPAK_DEST}/extra/rider/jre64
   # File system access
@@ -43,6 +54,8 @@ modules:
   - name: rider
     buildsystem: simple
     build-commands:
+      # Launcher
+      - install -D -m755 launcher.sh ${FLATPAK_DEST}/bin/launcher.sh
       # App binaries
       - cp -a JetBrains\ Rider-*/* ${FLATPAK_DEST}
       # Desktop file
@@ -61,7 +74,7 @@ modules:
       # Flatpak metadata
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
       # Icon
-      - install -D -m644 /app/bin/rider.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -D -m644 ${FLATPAK_DEST}/bin/rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
 
     sources:
       # App binaries - x86_64
@@ -112,10 +125,15 @@ modules:
       - type: file
         path: com.jetbrains.Rider.metainfo.xml
 
+      # Launcher (prepares shims)
+      - type: file
+        path: launcher.sh
+
+  # Flatpak IDE wrapper, configures .Net SDKs
   - name: ide-flatpak-wrapper
     buildsystem: meson
     config-opts:
-      - -Deditor_binary=/app/bin/rider
+      - -Deditor_binary=/app/bin/launcher.sh
       - -Dprogram_name=rider-wrapper
       - -Deditor_title=Rider
     sources:
