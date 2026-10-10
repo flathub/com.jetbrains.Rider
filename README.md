@@ -17,10 +17,15 @@ To install the .Net SDK (choose the relevant versions):
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 ```
 
+By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable,
+which you can customize as described below.
+
+### Customizing .Net SDKs
+
 > [!NOTE]
 > As noted before, add `--user` if you're using a user installation, e.g. `flatpak install --user flathub org.freedesktop.Sdk.Extension.dotnet10`.
 
-Then you need to enable the Flatpak extension by setting the `FLATPAK_ENABLE_SDK_EXT` environment variable to either `dotnet10` or `*`.
+You can configure what .Net SDKs are visible in the Flatpak, by changing the `FLATPAK_ENABLE_SDK_EXT` environment variable.
 
 Enable all SDK extensions:
 
@@ -37,6 +42,8 @@ Enable specific ones:
 # Multiple
 > flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet9,dotnet10 com.jetbrains.Rider
 ```
+
+### Diagnosing
 
 See current overrides:
 
@@ -72,6 +79,37 @@ You can allow Rider to talk to the Docker API, by adding the Docker socket as an
 ```bash
 > flatpak override --filesystem=/run/docker.sock com.jetbrains.Rider
 ```
+
+> [!NOTE]
+> The `docker` binary is shimmed in the Flatpak, meaning Rider can already call it, it just needs access to the Docker engine socket.
+
+## Web Browsers
+
+Rider can use a web browser to start applications and optionally attach the debugger to them.
+
+However, since Rider is running in the Flatpak sandbox, it can't see the browsers installed on your system.
+
+The Flatpak includes shims for a couple popular browsers, so that they can be called by Rider, as if they were in the sandbox itself.
+
+- Chrome (Flatpak, `com.google.Chrome`)
+- Chromium (Flatpak `org.chromium.Chromium`)
+- Edge (Flatpak, `com.microsoft.Edge`)
+- Firefox (native, `firefox`)
+- Ungoogled Chromium (Flatpak `io.github.ungoogled_software.ungoogled_chromium`)
+
+You can then configure these as you would normally:
+
+![Web Browser Configuration](./docs/web_browser_configuration_01.png)
+
+### Adding Additional Browsers
+
+If the browser of your choice is not in the above list, you can add it manually:
+
+```bash
+> flatpak override --env=PATH=/home/$USER/Public com.jetbrains.Rider
+```
+
+Additionally, you can also [open an issue](https://github.com/flathub/com.jetbrains.Rider/issues) requesting the browser, so it can be added to the list.
 
 ## C# Interactive
 
