@@ -1,41 +1,70 @@
 app-id: com.jetbrains.Rider
 runtime: org.freedesktop.Sdk
-runtime-version: '26.08'
+runtime-version: "26.08"
 sdk: org.freedesktop.Sdk
 command: rider-wrapper
 separate-locales: false
 tags:
   - proprietary
 finish-args:
-  - --share=ipc
-  - --socket=x11
-  - --socket=wayland
-  - --share=network
-  - --socket=pulseaudio
-  - --filesystem=host
-  - --filesystem=xdg-run/keyring
-  - --socket=session-bus
-  - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.freedesktop.secrets
-  - --talk-name=org.freedesktop.Flatpak
-  - --talk-name=org.freedesktop.FileManager1
-  - --device=all
+  # Direct Rendering Infrastructure, for GPU access
+  - --device=dri
+  # Enable Flatpak .Net SDKs, see this page for supported frameworks:
+  # https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core
+  - --env=FLATPAK_ENABLE_SDK_EXT=dotnet8,dotnet9,dotnet10
+  # Rider Java runtime
   - --env=RIDER_JDK=${FLATPAK_DEST}/extra/rider/jre64
+  # File system access
+  # TODO: Change to --filesystem=home?
+  - --filesystem=host
+  # Necessary for reasonable X11 performance
+  - --share=ipc
+  # Network access, necessary for plugin updates and various IDE-specific functionality
+  - --share=network
+  # Wayland desktop
+  - --socket=wayland
+  # Talking to X11
+  # Note that this needs to be "x11" and not "fallback-x11", due to UI-specific functionality in Rider
+  # At some point we should be able to remove this/replace with "fallback-x11"
+  # https://github.com/flathub/com.jetbrains.Rider/issues/168
+  - --socket=x11
+  # Use the host file manager
+  - --talk-name=org.freedesktop.FileManager1
+  # For spawning processes on the host
+  - --talk-name=org.freedesktop.Flatpak
+  # Secrets portal, for storing credentials in the host keyring
+  - --talk-name=org.freedesktop.secrets
+  # TODO: Can we remove these?
+  # - --filesystem=xdg-run/keyring
+  # - --socket=pulseaudio
+  # - --socket=session-bus
+  # - --talk-name=org.freedesktop.Notifications
 modules:
-
   - name: rider
     buildsystem: simple
     build-commands:
-      - unzip rider_logos.zip
+      # App binaries
       - cp -a JetBrains\ Rider-*/* ${FLATPAK_DEST}
-      - install -D -m644 rider_logos/icon-rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      # Desktop file
       - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
+      # host-spawn, used for starting processes on the host, like a terminal, and docker
+      - install -D -m755 host-spawn ${FLATPAK_DEST}/bin
+      # Shims
+      # These can be called by Rider as if they're native binaries,
+      # but pass the actual command on to the host using host-spawn
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/docker
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/com.google.Chrome
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/com.microsoft.Edge
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/firefox
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/io.github.ungoogled_software.ungoogled_chromium
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/org.chromium.Chromium
+      # Flatpak metadata
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
-      - cat idea.properties | tee -a ${FLATPAK_DEST}/bin/idea.properties
+      # Icon
+      - install -D -m644 /app/bin/rider.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
 
     sources:
-
-      # App binaries - x64
+      # App binaries - x86_64
       - type: archive
         strip-components: 0
         url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.3.1.tar.gz
@@ -47,7 +76,7 @@ modules:
           code: RD
           is-main-source: true
 
-      # App binaries - arm64
+      # App binaries - aarch64
       - type: archive
         strip-components: 0
         url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.3.1-aarch64.tar.gz
@@ -59,6 +88,22 @@ modules:
           code: RD
           is-main-source: true
 
+      # host-spawn - x86_64
+      - type: file
+        url: https://github.com/1player/host-spawn/releases/download/v1.6.2/host-spawn-x86_64
+        dest-filename: host-spawn
+        sha256: 077bc09a087292447ba17cfe2156a93f71bf56c4c6be8e38d3abe65c1240f34c
+        only-arches:
+          - x86_64
+
+      # host-spawn - aarch64
+      - type: file
+        url: https://github.com/1player/host-spawn/releases/download/v1.6.2/host-spawn-aarch64
+        dest-filename: host-spawn
+        sha256: 077bc09a087292447ba17cfe2156a93f71bf56c4c6be8e38d3abe65c1240f34c
+        only-arches:
+          - aarch64
+
       # Desktop file
       - type: file
         path: com.jetbrains.Rider.desktop
@@ -66,15 +111,6 @@ modules:
       # Flatpak metadata
       - type: file
         path: com.jetbrains.Rider.metainfo.xml
-
-      # Icons
-      - type: file
-        sha256: 894d2776d31ac722a2958f4dfd549652b4ea2c1615aafd403cdd7a3277e02850
-        url: https://resources.jetbrains.com/storage/products/rider/docs/rider_logos.zip
-
-      # Rider settings
-      - type: file
-        path: idea.properties
 
   - name: ide-flatpak-wrapper
     buildsystem: meson
