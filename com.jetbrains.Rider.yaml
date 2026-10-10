@@ -92,7 +92,7 @@ modules:
       - type: file
         url: https://github.com/1player/host-spawn/releases/download/v1.6.2/host-spawn-x86_64
         dest-filename: host-spawn
-        sha256: 8b30215b0b6b66c8c34a3e22d372dd39020295cd0904608bc2c5f5ecff829e5f
+        sha256: 077bc09a087292447ba17cfe2156a93f71bf56c4c6be8e38d3abe65c1240f34c
         only-arches:
           - x86_64
 
@@ -100,7 +100,7 @@ modules:
       - type: file
         url: https://github.com/1player/host-spawn/releases/download/v1.6.2/host-spawn-aarch64
         dest-filename: host-spawn
-        sha256: 077bc09a087292447ba17cfe2156a93f71bf56c4c6be8e38d3abe65c1240f34c
+        sha256: 8b30215b0b6b66c8c34a3e22d372dd39020295cd0904608bc2c5f5ecff829e5f
         only-arches:
           - aarch64
 
