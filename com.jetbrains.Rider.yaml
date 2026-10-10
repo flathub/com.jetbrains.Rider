@@ -45,10 +45,19 @@ modules:
     build-commands:
       # App binaries
       - cp -a JetBrains\ Rider-*/* ${FLATPAK_DEST}
-      # host-spawn, used for starting processes on the host, like a terminal, and docker
       # Desktop file
-      - install -D -m755 host-spawn ${FLATPAK_DEST}/bin
       - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
+      # host-spawn, used for starting processes on the host, like a terminal, and docker
+      - install -D -m755 host-spawn ${FLATPAK_DEST}/bin
+      # Shims
+      # These can be called by Rider as if they're native binaries,
+      # but pass the actual command on to the host using host-spawn
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/docker
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/com.google.Chrome
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/com.microsoft.Edge
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/firefox
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/io.github.ungoogled_software.ungoogled_chromium
+      - ln -s ${FLATPAK_DEST}/bin/host-spawn ${FLATPAK_DEST}/bin/org.chromium.Chromium
       # Flatpak metadata
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
       # Icon
