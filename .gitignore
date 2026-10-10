@@ -1,7 +1,3 @@
-*.iml
-.DS_Store
 .flatpak-builder/
-.idea/
 build/
 repo/
-Thumbs.db
