@@ -14,7 +14,6 @@ To install the .Net SDK (choose the relevant versions):
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet9
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
-> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 ```
 
 By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable,
@@ -37,15 +36,14 @@ Rider can use a web browser to start applications and optionally attach the debu
 
 However, since Rider is running in the Flatpak sandbox, it can't see the browsers installed on your system.
 
-The Flatpak includes shims for a couple popular browsers, so that they can be called by Rider, as if they were in the sandbox itself.
+The Flatpak includes shims for a couple popular browsers (both native and Flatpak versions), so that they can be called by Rider, as if they were in the sandbox itself.
 
-- Chrome (Flatpak, `com.google.Chrome`)
-- Chromium (Flatpak `org.chromium.Chromium`)
-- Edge (Flatpak, `com.microsoft.Edge`)
-- Firefox (native, `firefox`)
-- Ungoogled Chromium (Flatpak `io.github.ungoogled_software.ungoogled_chromium`)
+- Chrome
+- Chromium
+- Edge
+- Firefox
 
-You can then configure these as you would normally:
+You can configure these as you would normally:
 
 ![Web Browser Configuration](./docs/web_browser_configuration_01.png)
 
@@ -67,7 +65,7 @@ so it can be added to the list.
 >
 > `flatpak override --env=FLATPAK_SHIMS_ADD=com.brave.Browser com.jetbrains.Rider`
 
-Rider can use various external programs, like `docker`, `kubectl` and web browers like `firefox` or `chromium`.
+Rider can use various external programs, like `docker`, `kubectl` and web browsers like `firefox` or `chromium`.
 But these apps live outside the Flatpak sandbox, so by default, Rider won't see them.
 
 You can make such apps available to Rider by creating **shims**; small executables that can be called by Rider, and
@@ -200,7 +198,7 @@ Add Flathub as a user-wide repo:
 Build Rider flatpak (for current architecture, including install):
 
 ```bash
-> ./build.sh
+> ./scripts/build.sh
 ```
 
 Build flatpak for specific architecture, without install:
@@ -210,6 +208,6 @@ Build flatpak for specific architecture, without install:
 > install `qemu-user-static` and `qemu-user-static-binfmt`.
 
 ```bash
-> ./build-aarch64.sh
-> ./build-x86_64.sh
+> ./scripts/build-aarch64.sh
+> ./scripts/build-x86_64.sh
 ```
