@@ -1,8 +1,8 @@
 [Desktop Entry]
 Categories=Development;IDE;
-Comment=The world's most loved .NET and game dev IDE
+Comment=Fast & powerful cross-platform .NET IDE
 Exec=rider-wrapper
-GenericName=.NET IDE
+GenericName=Fast & powerful cross-platform .NET IDE
 Icon=com.jetbrains.Rider
 Keywords=development;
 MimeType=application/x-dotnet-solution;application/x-dotnet-fsharp-project;application/x-dotnet-csharp-project;application/x-dotnet-vb-project;text/x-csharp;text/x-fsharp;text/x-visualbasic;

@@ -9,6 +9,8 @@ tags:
 finish-args:
   # Direct Rendering Infrastructure, for GPU access
   - --device=dri
+  #
+  - --env=PATH=/app/bin:/app/extensions/bin:/usr/bin
   # Enable Flatpak .Net SDKs, see this page for supported frameworks:
   # https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core
   - --env=FLATPAK_ENABLE_SDK_EXT=dotnet8,dotnet9,dotnet10
@@ -51,6 +53,15 @@ finish-args:
   # - --socket=pulseaudio
   # - --socket=session-bus
   # - --talk-name=org.freedesktop.Notifications
+# Extension point for optional Flatpak to plug in
+add-extensions:
+  com.jetbrains.Rider.Extension:
+    directory: extensions
+    version: "26.08"
+    add-ld-path: lib
+    merge-dirs: bin;lib
+    subdirectories: true
+    no-autodownload: true
 modules:
   - name: rider
     buildsystem: simple
@@ -67,6 +78,8 @@ modules:
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
       # Icon
       - install -D -m644 ${FLATPAK_DEST}/bin/rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      #
+      - install -d "${FLATPAK_DEST}/extensions"
 
     sources:
       # App binaries - x86_64

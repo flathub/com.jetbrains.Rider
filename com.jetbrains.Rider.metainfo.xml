@@ -4,12 +4,14 @@
   <metadata_license>CC-BY-SA</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>Rider</name>
-  <summary>Fast &amp; powerful, cross platform .NET IDE</summary>
+  <summary>Fast &amp; powerful cross-platform .NET IDE</summary>
   <description>
-    <p>Rider supports .NET Framework, the new cross-platform .NET Core, and Mono based projects. This lets you develop a wide range of applications including .NET desktop applications, services and libraries, Unity games, Xamarin apps, ASP.NET, and ASP.NET Core web applications.</p>
-    <p>Rider provides 2200+ live code inspections, hundreds of context actions and refactorings brought by ReSharper, and combines them with the IntelliJ platform's solid IDE features. Despite a heavy feature set, Rider is designed to be fast and responsive.</p>
-    <p>As well as running and debugging multiple runtimes, Rider itself runs on multiple platforms: Windows, macOS, and Linux.</p>
+    <p>Rider helps you develop .NET, ASP.NET, .NET Core, Xamarin, or Unity applications on Windows, macOS, or Linux. It provides rich editing support and code insight for languages used in .NET development, from C#, VB.NET, and F# to ASP.NET Razor syntax, JavaScript, TypeScript, XAML, XML, HTML, CSS, SCSS, JSON, and SQL.</p>
   </description>
+  <branding>
+    <color type="primary" scheme_preference="light">#fe9c0e</color>
+    <color type="primary" scheme_preference="dark">#fe9c0e</color>
+  </branding>
   <url type="bugtracker">https://youtrack.jetbrains.com/</url>
   <url type="help">https://www.jetbrains.com/help/rider/</url>
   <url type="homepage">http://www.jetbrains.com/rider/</url>
@@ -17,10 +19,71 @@
   <developer_name>JetBrains s.r.o.</developer_name>
   <screenshots>
     <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/code_completion@2x.png</image>
+      <caption>Rider lets you open, edit, build, run, and debug most kinds of .NET applications, including desktop apps, web apps, libraries, and services.</caption>
+    </screenshot>
+
+    <screenshot type="default">
       <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/mac@2x.png</image>
+      <caption>Rider can run on multiple platforms: Windows, macOS and different breeds of Linux. If you want to edit, build, run or debug Unity or .NET Core applications on a macOS, here's your full-blown IDE.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/code_editor@2x.png</image>
+      <caption>Rider provides tons of smart code editing features, such as different kinds of code completion, auto-importing namespaces, auto-inserting braces and highlighting matching delimiters, rearranging code, as well as quick access to refactorings, generation, navigation and context actions.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/code_analysis@2x.png</image>
+      <caption>Rider boasts 2200+ live code inspections to help you detect errors and code smells. Over 1000 quick-fixes are available to resolve detected issues individually or in bulk.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/navigation@2x.png</image>
+      <caption>Jump to any file, type, or member in your code base in no time, as well as find settings and actions, all with a common Search Everywhere shortcut.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/decompiler@2x.png</image>
+      <caption>Want to know how third-party library code works? No problem with Rider: just use Go to Declaration on a library symbol, and have Rider decompile the library type to C# in a regular editor tab.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/refactoring@2x.png</image>
+      <caption>Most of ReSharper's 60+ refactorings are already available in Rider, and its 450+ context actions are all there.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/unit_testing@2x.png</image>
+      <caption>Rider lets you run and debug unit tests based on NUnit, xUnit.net or MSTest in applications targeting .NET Framework, .NET Core and Mono.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/debugger@2x.png</image>
+      <caption>Rider includes a debugger that works with .NET Framework, Mono and .NET Core applications.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/version_control@2x.png</image>
+      <caption>Rider includes support for Git, Subversion, Mercurial, Perforce and TFS out of the box, with more version control systems supported via plugins.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/web_development@2x.png</image>
+      <caption>With JetBrains Rider, you can develop modern web, mobile, and desktop applications with JavaScript, TypeScript, HTML, CSS, and Sass support built in.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/database@2x.png</image>
+      <caption>You can work with SQL and databases without leaving Rider. Connect to databases, edit schemas and table data, run queries, and even analyze schemas with UML diagrams.</caption>
+    </screenshot>
+
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/rider/features/screenshots/img/plugins@2x.png</image>
+      <caption>Rider takes advantage of its roots by supporting a wide array of plugins developed for the IntelliJ platform and ReSharper.</caption>
     </screenshot>
   </screenshots>
-  <update_contact>sakcheen+flathub_AT_gmail.com</update_contact>
+  <update_contact>flathub+rider@flyingpie.nl</update_contact>
   <content_rating type="oars-1.1" />
   <releases>
     <release version="2026.2.3.1" date="2026-10-01">
