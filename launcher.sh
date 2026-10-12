@@ -8,7 +8,7 @@ mkdir -p "${SHIMS_DIR}"
 
 # Create shims for each of the entries in the FLATPAK_SHIMS and FLATPAK_SHIMS_ADD environment variables.
 # Multiple entries are delimited with ",", like "docker,kubectl,podman".
-IFS=',' read -ra SHIMS <<< "${FLATPAK_SHIMS},${FLATPAK_SHIMS_ADD}"
+IFS=',' read -ra SHIMS <<< "${FLATPAK_SHIMS_PRECONFIGURED},${FLATPAK_SHIMS}"
 for shim in "${SHIMS[@]}"; do
 	# Trim
 	shim="${shim#"${shim%%[![:space:]]*}"}"

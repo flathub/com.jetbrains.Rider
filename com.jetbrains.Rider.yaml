@@ -9,14 +9,14 @@ tags:
 finish-args:
   # Direct Rendering Infrastructure, for GPU access
   - --device=dri
-  #
+  # Add extensions dir to PATH
   - --env=PATH=/app/bin:/app/extensions/bin:/usr/bin
   # Enable Flatpak .Net SDKs, see this page for supported frameworks:
   # https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core
   - --env=FLATPAK_ENABLE_SDK_EXT=dotnet8,dotnet9,dotnet10
   # Pre-configured shims
   - >-
-    --env=FLATPAK_SHIMS=
+    --env=FLATPAK_SHIMS_PRECONFIGURED=
     docker,
     kubectl,
     podman,
