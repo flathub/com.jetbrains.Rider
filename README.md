@@ -30,6 +30,8 @@ You can allow Rider to talk to the Docker API, by adding the Docker socket as an
 > [!NOTE]
 > The `docker` binary is shimmed in the Flatpak, meaning Rider can already call it, it just needs access to the Docker engine socket.
 
+![Docker](./docs/docker_01.png)
+
 ## Web Browsers
 
 Rider can use a web browser to start applications and optionally attach the debugger to them.
