@@ -5,8 +5,7 @@
 
 ## Setting up Dotnet
 
-It is highly recommended to use the [.Net SDK extension provided by Flatpak](https://github.com/flathub/org.freedesktop.Sdk.Extension.dotnet10) instead of one installed from your package manager.
-Using the host-installed SDK can cause problems due to misaligned dependencies, such as [breaking with system updates](https://github.com/flathub/com.jetbrains.Rider/issues/43).
+It is highly recommended to use the [.Net SDK extension provided by Flatpak](https://github.com/flathub/org.freedesktop.Sdk.Extension.dotnet10) instead of one installed from your package manager. Using the host-installed SDK can cause problems due to misaligned dependencies, such as [breaking with system updates](https://github.com/flathub/com.jetbrains.Rider/issues/43).
 
 To install the .Net SDK (choose the relevant versions):
 
@@ -14,56 +13,9 @@ To install the .Net SDK (choose the relevant versions):
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet9
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
-> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 ```
 
-> [!NOTE]
-> As noted before, add `--user` if you're using a user installation, e.g. `flatpak install --user flathub org.freedesktop.Sdk.Extension.dotnet10`.
-
-Then you need to enable the Flatpak extension by setting the `FLATPAK_ENABLE_SDK_EXT` environment variable to either `dotnet10` or `*`.
-
-Enable all SDK extensions:
-
-```bash
-> flatpak override --env="FLATPAK_ENABLE_SDK_EXT=*" com.jetbrains.Rider
-```
-
-Enable specific ones:
-
-```bash
-# Single
-> flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet10 com.jetbrains.Rider
-
-# Multiple
-> flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet9,dotnet10 com.jetbrains.Rider
-```
-
-See current overrides:
-
-```bash
-> flatpak override --show com.jetbrains.Rider
-
-[Environment]
-FLATPAK_ENABLE_SDK_EXT=*
-```
-
-> [!NOTE]
-> This functionality is inherited from the [Flatpak wrapper for IDEs](https://github.com/flathub-infra/ide-flatpak-wrapper).
-
-You can check what SDKs Rider is seeing through the terminal:
-
-```bash
-> dotnet --list-sdks
-10.0.401 [/usr/lib/sdk/dotnet10/lib/sdk]
-
-> dotnet --list-runtimes
-Microsoft.AspNetCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.AspNetCore.App]
-Microsoft.NETCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.NETCore.App]
-```
-
-> [!NOTE]
-> The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
-> Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
+By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable, which you can customize as described below.
 
 ## Docker Engine
 
@@ -72,6 +24,67 @@ You can allow Rider to talk to the Docker API, by adding the Docker socket as an
 ```bash
 > flatpak override --filesystem=/run/docker.sock com.jetbrains.Rider
 ```
+
+> [!NOTE]
+> The `docker` binary is shimmed in the Flatpak, meaning Rider can already call it, it just needs access to the Docker engine socket.
+
+![Docker](./docs/docker_01.png)
+
+## Web Browsers
+
+Rider can use a web browser to start applications and optionally attach the debugger to them.
+
+However, since Rider is running in the Flatpak sandbox, it can't see the browsers installed on your system.
+
+The Flatpak includes shims for a couple popular browsers (both native and Flatpak versions), so that they can be called by Rider, as if they were in the sandbox itself.
+
+- Chrome
+- Chromium
+- Edge
+- Firefox
+
+You can configure these as you would normally:
+
+![Web Browser Configuration](./docs/web_browser_configuration_01.png)
+
+### Adding Additional Browsers
+
+If the browser of your choice is not in the above list, you can add it manually:
+
+```bash
+> flatpak override --env=FLATPAK_SHIMS=com.brave.Browser com.jetbrains.Rider
+```
+
+Additionally, you can also [open an issue](https://github.com/flathub/com.jetbrains.Rider/issues) requesting the browser, so it can be added to the list.
+
+## Using Applications on the Host
+
+> [!NOTE]
+> **TL;DR:** Make the Flatpak version of the Brave browser available to Rider:
+>
+> `flatpak override --env=FLATPAK_SHIMS=com.brave.Browser com.jetbrains.Rider`
+
+Rider can use various external programs, like `docker`, `kubectl` and web browsers like `firefox` or `chromium`.
+But these apps live outside the Flatpak sandbox, so by default, Rider won't see them.
+
+You can make such apps available to Rider by creating **shims**; small executables that can be called by Rider, and
+route to the real app, on the host.
+
+This can be done through the `FLATPAK_SHIMS` environment variable:
+
+```bash
+> flatpak override --env=FLATPAK_SHIMS=com.brave.Browser com.jetbrains.Rider
+```
+
+These shims come pre-configured:
+
+- docker
+- kubectl
+- podman
+- A set of browsers, see [Web Browsers](##Web Browsers)
+
+> [!NOTE]
+> Shims are generated by [host-spawn](https://github.com/1player/host-spawn).
 
 ## C# Interactive
 
@@ -110,6 +123,58 @@ Now, starting a new C# Interactive session should work:
 
 ![C# Interactive Demo](./docs/csharp_interactive_02.png)
 
+## Customizing .Net SDKs
+
+> [!NOTE]
+> As noted before, add `--user` if you're using a user installation, e.g. `flatpak install --user flathub org.freedesktop.Sdk.Extension.dotnet10`.
+
+You can configure what .Net SDKs are visible in the Flatpak, by changing the `FLATPAK_ENABLE_SDK_EXT` environment variable.
+
+Enable all SDK extensions:
+
+```bash
+> flatpak override --env="FLATPAK_ENABLE_SDK_EXT=*" com.jetbrains.Rider
+```
+
+Enable specific ones:
+
+```bash
+# Single
+> flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet10 com.jetbrains.Rider
+
+# Multiple
+> flatpak override --env=FLATPAK_ENABLE_SDK_EXT=dotnet9,dotnet10 com.jetbrains.Rider
+```
+
+### Diagnosing
+
+See current overrides:
+
+```bash
+> flatpak override --show com.jetbrains.Rider
+
+[Environment]
+FLATPAK_ENABLE_SDK_EXT=*
+```
+
+> [!NOTE]
+> This functionality is inherited from the [Flatpak wrapper for IDEs](https://github.com/flathub-infra/ide-flatpak-wrapper).
+
+You can check what SDKs Rider is seeing through the terminal:
+
+```bash
+> dotnet --list-sdks
+10.0.401 [/usr/lib/sdk/dotnet10/lib/sdk]
+
+> dotnet --list-runtimes
+Microsoft.AspNetCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.AspNetCore.App]
+Microsoft.NETCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.NETCore.App]
+```
+
+> [!NOTE]
+> The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
+> Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
+
 ## Building Flatpak Package Locally
 
 Install flatpak-builder:
@@ -127,12 +192,16 @@ Add Flathub as a user-wide repo:
 Build Rider flatpak (for current architecture, including install):
 
 ```bash
-> ./build.sh
+> ./scripts/build.sh
 ```
 
 Build flatpak for specific architecture, without install:
 
+> [!NOTE]
+> To build for an architecture different than the current machine,
+> install `qemu-user-static` and `qemu-user-static-binfmt`.
+
 ```bash
-> ./build-aarch64.sh
-> ./build-x86_64.sh
+> ./scripts/build-aarch64.sh
+> ./scripts/build-x86_64.sh
 ```

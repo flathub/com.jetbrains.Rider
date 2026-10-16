@@ -1,12 +1,13 @@
 [Desktop Entry]
 Categories=Development;IDE;
+Comment=Fast & powerful cross-platform .NET IDE
 Exec=rider-wrapper
-GenericName=Fast & powerful, cross platform .NET IDE
+GenericName=Fast & powerful cross-platform .NET IDE
 Icon=com.jetbrains.Rider
 Keywords=development;
+MimeType=application/x-dotnet-solution;application/x-dotnet-fsharp-project;application/x-dotnet-csharp-project;application/x-dotnet-vb-project;text/x-csharp;text/x-fsharp;text/x-visualbasic;
 Name=Rider
 StartupNotify=true
 StartupWMClass=jetbrains-rider
 Terminal=false
 Type=Application
-MimeType=application/x-dotnet-solution;application/x-dotnet-fsharp-project;application/x-dotnet-csharp-project;application/x-dotnet-vb-project;text/x-csharp;text/x-fsharp;text/x-visualbasic;
