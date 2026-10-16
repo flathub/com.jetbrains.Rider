@@ -5,8 +5,7 @@
 
 ## Setting up Dotnet
 
-It is highly recommended to use the [.Net SDK extension provided by Flatpak](https://github.com/flathub/org.freedesktop.Sdk.Extension.dotnet10) instead of one installed from your package manager.
-Using the host-installed SDK can cause problems due to misaligned dependencies, such as [breaking with system updates](https://github.com/flathub/com.jetbrains.Rider/issues/43).
+It is highly recommended to use the [.Net SDK extension provided by Flatpak](https://github.com/flathub/org.freedesktop.Sdk.Extension.dotnet10) instead of one installed from your package manager. Using the host-installed SDK can cause problems due to misaligned dependencies, such as [breaking with system updates](https://github.com/flathub/com.jetbrains.Rider/issues/43).
 
 To install the .Net SDK (choose the relevant versions):
 
@@ -16,8 +15,7 @@ To install the .Net SDK (choose the relevant versions):
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
 ```
 
-By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable,
-which you can customize as described below.
+By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable, which you can customize as described below.
 
 ## Docker Engine
 

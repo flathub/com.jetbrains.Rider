@@ -78,7 +78,7 @@ modules:
       - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml
       # Icon
       - install -D -m644 ${FLATPAK_DEST}/bin/rider.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      #
+      # Extensions
       - install -d "${FLATPAK_DEST}/extensions"
 
     sources:
