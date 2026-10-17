@@ -44,6 +44,8 @@ Alternatively, you can also use a specific terminal by adding a shim for it, and
 
 ![Host Terminal](./docs/terminal_host_spawn_02.png)
 
+![Host Terminal](./docs/terminal_host_spawn_03.png)
+
 ## Web Browsers
 
 Rider can use a web browser to start applications and optionally attach the debugger to them.
