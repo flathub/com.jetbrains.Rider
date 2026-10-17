@@ -44,6 +44,9 @@ Alternatively, you can also use a specific terminal by adding a shim for it, and
 
 ![Host Terminal](./docs/terminal_host_spawn_02.png)
 
+> [!NOTE]
+> See [#using-applications-on-the-host](how shims work) below.
+
 ![Host Terminal](./docs/terminal_host_spawn_03.png)
 
 ## Web Browsers
