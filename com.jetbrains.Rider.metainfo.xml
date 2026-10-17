@@ -10,7 +10,7 @@
   </description>
   <branding>
     <color type="primary" scheme_preference="light">#fe9c0e</color>
-    <color type="primary" scheme_preference="dark">#fe9c0e</color>
+    <color type="primary" scheme_preference="dark">#000000</color>
   </branding>
   <url type="bugtracker">https://youtrack.jetbrains.com/</url>
   <url type="help">https://www.jetbrains.com/help/rider/</url>

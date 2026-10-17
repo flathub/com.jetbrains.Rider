@@ -30,6 +30,20 @@ You can allow Rider to talk to the Docker API, by adding the Docker socket as an
 
 ![Docker](./docs/docker_01.png)
 
+## Using the host terminal
+
+You can configure Rider to use the host's terminal, through [host-spawn](https://github.com/1player/host-spawn):
+
+![Host Terminal](./docs/terminal_host_spawn_01.png)
+
+Alternatively, you can also use a specific terminal by adding a shim for it, and configure that:
+
+```bash
+> flatpak override --env=FLATPAK_SHIMS=zsh com.jetbrains.Rider
+```
+
+![Host Terminal](./docs/terminal_host_spawn_02.png)
+
 ## Web Browsers
 
 Rider can use a web browser to start applications and optionally attach the debugger to them.
