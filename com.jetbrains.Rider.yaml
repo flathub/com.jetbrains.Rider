@@ -1,6 +1,6 @@
 app-id: com.jetbrains.Rider
 runtime: org.freedesktop.Sdk
-runtime-version: "26.08"
+runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
 command: rider-wrapper
 separate-locales: false
@@ -57,7 +57,7 @@ finish-args:
 add-extensions:
   com.jetbrains.Rider.Extension:
     directory: extensions
-    version: "26.08"
+    version: '26.08'
     add-ld-path: lib
     merge-dirs: bin;lib
     subdirectories: true
@@ -85,8 +85,8 @@ modules:
       # App binaries - x86_64
       - type: archive
         strip-components: 0
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.3.1.tar.gz
-        sha256: fa4b09a5f7cf4b6635b093adc7313991778a8dc74f25614a2b8976b04dee5d4e
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.4.tar.gz
+        sha256: 6e5ac7238a5b95f905b9a1404c42eb4d7bc5566d950750b0078f20bd78a3f599
         only-arches:
           - x86_64
         x-checker-data:
@@ -97,8 +97,8 @@ modules:
       # App binaries - aarch64
       - type: archive
         strip-components: 0
-        url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.3.1-aarch64.tar.gz
-        sha256: 8239c1e7c0352a9fb79dcbf68fb9550d64b215606a635ed88981291d92995a61
+        url: https://download.jetbrains.com/rider/JetBrains.Rider-2026.2.4-aarch64.tar.gz
+        sha256: adaaadc42dbfe2efa8e3aa96e487ba7b7ea33858b6bc1aad8ac5024205555ecd
         only-arches:
           - aarch64
         x-checker-data:
