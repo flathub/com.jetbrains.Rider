@@ -25,5 +25,14 @@ done
 # Add our shims dir to PATH.
 export PATH="${SHIMS_DIR}:${PATH}"
 
+# Let installed extensions set up their environment, e.g. com.jetbrains.Rider.Extension.DotnetWorkloads.
+for enable in /app/extensions/*/enable.sh; do
+	[[ -f "${enable}" ]] || continue
+
+	echo "Sourcing ${enable}"
+	# shellcheck source=/dev/null
+	. "${enable}"
+done
+
 # Start app.
 exec /app/bin/rider "$@"

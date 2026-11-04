@@ -194,6 +194,19 @@ Microsoft.NETCore.App 10.0.12 [/usr/lib/sdk/dotnet10/lib/shared/Microsoft.NETCor
 > The Flatpak version of the .Net SDK is under `/usr/lib/sdk/dotnet*`.
 > Local versions are usually under `/var/run/host/usr/share/dotnet`, since Flatpak mounts the host's file system under `/var/run`.
 
+### .Net Workloads
+
+The Flatpak .Net SDK is read-only, so `dotnet workload install` does not work.
+
+Workloads that are not part of the Flatpak .Net SDK are provided by the [.Net Workloads extension](https://github.com/flathub/com.jetbrains.Rider.Extension.DotnetWorkloads). It currently includes `wasm-tools` (WebAssembly AOT and native relinking) for .Net 10:
+
+```bash
+> flatpak install flathub com.jetbrains.Rider.Extension.DotnetWorkloads
+```
+
+> [!NOTE]
+> Extensions can set up their environment through an `enable.sh` script, which is sourced by the launcher on startup (`/app/extensions/*/enable.sh`).
+
 ## Building Flatpak Package Locally
 
 Install flatpak-builder:
