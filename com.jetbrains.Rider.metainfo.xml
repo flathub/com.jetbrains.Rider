@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>com.jetbrains.Rider</id>
   <metadata_license>CC-BY-SA</metadata_license>
-  <project_license>LicenseRef-proprietary</project_license>
+  <project_license>LicenseRef-proprietary=https://www.jetbrains.com/legal/docs/toolbox/user/</project_license>
   <name>Rider</name>
   <summary>Fast &amp; powerful cross-platform .NET IDE</summary>
   <description>
