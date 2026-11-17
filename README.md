@@ -13,6 +13,7 @@ To install the .Net SDK (choose the relevant versions):
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet9
 > flatpak install flathub org.freedesktop.Sdk.Extension.dotnet10
+> flatpak install flathub org.freedesktop.Sdk.Extension.dotnet11
 ```
 
 By default, the Rider Flatpak is set up to pick up all supported .Net SDKs. This is done through the `FLATPAK_ENABLE_SDK_EXT` environment variable, which you can customize as described below.

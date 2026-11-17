@@ -13,7 +13,7 @@ finish-args:
   - --env=PATH=/app/bin:/app/extensions/bin:/usr/bin
   # Enable Flatpak .Net SDKs, see this page for supported frameworks:
   # https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core
-  - --env=FLATPAK_ENABLE_SDK_EXT=dotnet8,dotnet9,dotnet10
+  - --env=FLATPAK_ENABLE_SDK_EXT=dotnet8,dotnet9,dotnet10,dotnet11
   # Pre-configured shims
   - >-
     --env=FLATPAK_SHIMS_PRECONFIGURED=
