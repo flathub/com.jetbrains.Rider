@@ -86,9 +86,13 @@
   <update_contact>flathub+rider@flyingpie.nl</update_contact>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="2026.3.0.2" date="2026-11-24">
+      <url type="details">https://youtrack.jetbrains.com/articles/DOTNET-A-444/Rider-2026.3.0.2-release-notes</url>
+      <description></description>
+    </release>
     <release version="2026.3.0.1" date="2026-11-18">
       <url type="details">https://youtrack.jetbrains.com/articles/DOTNET-A-437/Rider-2026.3.0.1-release-notes</url>
-      <description></description>
+      <description/>
     </release>
     <release version="2026.3" date="2026-11-10">
       <url type="details">https://youtrack.jetbrains.com/articles/DOTNET-A-432/Rider-2026.3-release-notes</url>
